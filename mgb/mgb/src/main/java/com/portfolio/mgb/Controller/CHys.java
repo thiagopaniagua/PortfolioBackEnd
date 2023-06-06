@@ -34,7 +34,7 @@ public class CHys {
     @Autowired
     Shys shys;
     
-    @GetMapping("/Lista")
+    @GetMapping("/lista")
     public ResponseEntity<List<HyS>> list(){
         List<HyS> list = shys.list();
         return new ResponseEntity(list, HttpStatus.OK);
@@ -42,7 +42,7 @@ public class CHys {
     
     @GetMapping("/detail/{id}")
     public ResponseEntity<HyS> getById(@PathVariable("id") int id){
-        if(shys.existById(id))
+        if(!shys.existById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         HyS hys = shys.getOne(id).get();
         return new ResponseEntity(hys, HttpStatus.OK);

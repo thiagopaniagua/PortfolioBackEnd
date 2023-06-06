@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author titip
  */
 @RestController
-@RequestMapping("/educacion")
 @CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/educacion")
 public class Ceducacion {
     @Autowired
     Seducacion sEducacion;
@@ -41,14 +41,15 @@ public class Ceducacion {
         return new ResponseEntity(list, HttpStatus.OK);
     }
     
-    @GetMapping("/detail({id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<Educacion> getById(@PathVariable("id")int id){
         if(!sEducacion.existById(id)){
             return new ResponseEntity(new Mensaje("No existe el ID"), HttpStatus.BAD_REQUEST);
-            
-        }
+         
+       } 
         Educacion educacion = sEducacion.getOne(id).get();
-        return new ResponseEntity(educacion, HttpStatus.OK);
+        return new ResponseEntity(educacion, HttpStatus.OK);  
+        
     }
     
     @DeleteMapping("/delete/{id}")
